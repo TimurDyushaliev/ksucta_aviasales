@@ -10,9 +10,11 @@ class FlightsPage extends StatefulWidget {
   const FlightsPage({
     Key? key,
     required this.searchQuery,
+    required this.passengersAmount,
   }) : super(key: key);
 
   final SearchQuery searchQuery;
+  final int passengersAmount;
 
   @override
   State<FlightsPage> createState() => _FlightsPageState();
@@ -34,16 +36,17 @@ class _FlightsPageState extends State<FlightsPage> {
                 itemCount: models.length,
                 itemBuilder: (context, index) {
                   final model = models[index];
-                  final price = NumberFormat('#,##,000')
-                      .format(model.price)
-                      .replaceAll(',', ' ');
+                  final price = model.price * widget.passengersAmount;
 
                   return InkWell(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => FlightInfPage(model: model),
+                            builder: (context) => FlightInfPage(
+                                model: model.copyWith(
+                              price: price,
+                            )),
                           ));
                     },
                     child: Card(
@@ -58,7 +61,7 @@ class _FlightsPageState extends State<FlightsPage> {
                           '${model.departureDateTime.toHourMinuteString()} - ${model.arrivalDateTime.toHourMinuteString()}',
                         ),
                         trailing: Text(
-                          '${price}c',
+                          '${NumberFormat('#,##,000').format(price).replaceAll(',', ' ')}c',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),

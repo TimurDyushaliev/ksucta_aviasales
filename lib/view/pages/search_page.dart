@@ -90,6 +90,8 @@ class _SearchPageState extends State<SearchPage> {
                               arrivalCity: textEditingControllers[1].text,
                               dateTime: selectedDate!,
                             ),
+                            passengersAmount:
+                                int.parse(textEditingControllers[3].text),
                           ),
                         ),
                       );

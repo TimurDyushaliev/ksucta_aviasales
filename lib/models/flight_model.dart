@@ -44,6 +44,26 @@ class FlightModel extends Equatable {
     };
   }
 
+  FlightModel copyWith({
+    String? logoUrl,
+    String? companyName,
+    String? departureCity,
+    String? arrivalCity,
+    int? price,
+    DateTime? departureDateTime,
+    DateTime? arrivalDateTime,
+  }) {
+    return FlightModel(
+      logoUrl: logoUrl ?? this.logoUrl,
+      companyName: companyName ?? this.companyName,
+      departureCity: departureCity ?? this.departureCity,
+      arrivalCity: arrivalCity ?? this.arrivalCity,
+      price: price ?? this.price,
+      departureDateTime: departureDateTime ?? this.departureDateTime,
+      arrivalDateTime: arrivalDateTime ?? this.arrivalDateTime,
+    );
+  }
+
   @override
   List<Object?> get props => [
         logoUrl,

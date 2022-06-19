@@ -98,14 +98,16 @@ class FlightInfPage extends StatelessWidget {
   }
 
   String _getTimeOfFlight() {
-    final differenceInHours =
-        model.arrivalDateTime.hour - model.departureDateTime.hour;
-    final differenceInMinute =
-        model.arrivalDateTime.minute - model.departureDateTime.minute;
-    if (differenceInMinute > 0) {
-      return '$differenceInHoursч $differenceInMinuteм';
+    final difference =
+        model.arrivalDateTime.difference(model.departureDateTime);
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(difference.inMinutes.remainder(60));
+    if (difference.inHours == 0 && int.parse(twoDigitMinutes) == 0) {
+      return '0м';
+    } else if (int.parse(twoDigitMinutes) > 0) {
+      return "${twoDigits(difference.inHours)}ч $twoDigitMinutesм";
     } else {
-      return '$differenceInHoursч';
+      return '${twoDigits(difference.inHours)}ч';
     }
   }
 }
