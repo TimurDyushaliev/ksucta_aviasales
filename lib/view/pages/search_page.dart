@@ -86,8 +86,10 @@ class _SearchPageState extends State<SearchPage> {
                         MaterialPageRoute(
                           builder: (context) => FlightsPage(
                             searchQuery: SearchQuery(
-                              departureCity: textEditingControllers[0].text,
-                              arrivalCity: textEditingControllers[1].text,
+                              departureCity:
+                                  textEditingControllers[0].text.trim(),
+                              arrivalCity:
+                                  textEditingControllers[1].text.trim(),
                               dateTime: selectedDate!,
                             ),
                             passengersAmount:
